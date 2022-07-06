@@ -1,0 +1,16 @@
+.b-top,.imgs,.b-bottom{
+    display: flex;
+    justify-content: space-around;
+}
+.email-address{
+    width: 30px;
+    height: 30px;
+    color:orange
+}
+.fa-arrow-right-to-arc{
+    color:black;
+}
+a{
+    text-decoration: none;
+    color: coral;
+}

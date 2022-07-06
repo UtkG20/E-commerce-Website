@@ -1,0 +1,95 @@
+h3 {
+    text-align: center;
+    display: table; 
+     width: 90%;
+     color: rgb(228, 228, 10);
+}
+h3:before, h3:after {
+    display: table-cell;
+}
+h3:before, h3:after{
+    background: url(http://dummyimage.com/2x1/f0f/fff&text=+) repeat-x center;
+    width: 30%;
+    content: '';
+}
+.p1{
+    text-align: center;
+    width: 200px;
+    margin: 5px;
+    border: solid thin black;
+}
+.img-set{
+    margin: 5px;
+}
+.prc,.nm{
+    margin: 3px;
+}
+.collage{
+    display: flex;
+    flex-flow: row wrap;
+    max-height: 750px;
+    overflow:scroll;
+    transition:2s ease-in-out ;
+    animation-name: slideDown;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-timing-function: ease;
+    -webkit-animation-timing-function:ease ;
+}
+
+@keyframes slideDown{
+    0%{
+        transform: translateY(-100%);
+    }
+    50%{
+        transform: translateY(4%);
+    }
+    65%{
+        transform: translateY(-4%);
+    }
+    80%{
+        transform: translateY(2%);
+    }
+    95%{
+        transform: translateY(-2%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+.fa-angle-up{
+    transition: 0.2s ease-out;
+}
+
+.p1{
+    height: 370px;
+}
+.p1-carousel{
+    height:330px;
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+}
+.p1 img{
+    height:240px;
+    width: 190px;
+    object-fit:cover;
+}
+.fa-angle-up{
+    float: right;
+    background-color:orange;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.icon{
+    animation-name: icon;
+    transition: 0.2s ease-in;
+    transform:rotate(180deg);
+}
+
+.recommended{
+    max-width: 900px;
+}
+
