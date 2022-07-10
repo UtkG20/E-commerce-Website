@@ -1,23 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Subscription } from 'rxjs';
 import { ProductDataService } from '../services/product-data.service';
 @Component({
   selector: 'app-main-bar',
   templateUrl: './main-bar.component.html',
   styleUrls: ['./main-bar.component.css']
 })
-export class MainBarComponent implements OnInit {
+export class MainBarComponent implements OnInit,OnDestroy {
 
  products:any;
   constructor(private productData:ProductDataService, private productDataService:ProductDataService) { 
     this.products=productData.products;
+    this.subscribe= Subscription.EMPTY;
   }
+  subscribe:Subscription;
 
   selectedCountry:any;
+  selectedCategories:any;
+  categoryCount:any;
+  lowPrice:any;
+  highPrice:any;
+
   ngOnInit(): void {
-    this.productDataService.country.subscribe(data=>{
+    this.subscribe = this.productDataService.country.subscribe(data=>{
       this.selectedCountry=data;
     })
+
+    this.productDataService.categoryMap.subscribe(data=>{
+      this.selectedCategories=data;
+    })
+
+    this.productDataService.categoryCount.subscribe(data=>{
+      this.categoryCount=data;
+    })
+
+    this.productDataService.lowPrice.subscribe(data=>{
+      this.lowPrice=data;
+    })
+
+    this.productDataService.highPrice.subscribe(data=>{
+      this.highPrice=data;
+    })
+  }
+
+  ngOnDestroy(){
+      this.subscribe.unsubscribe();
   }
 
   countryFilter(){

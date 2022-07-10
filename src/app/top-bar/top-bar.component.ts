@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductDataService } from '../services/product-data.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
   styleUrls: ['./top-bar.component.css']
 })
-export class TopBarComponent implements OnInit {
+export class TopBarComponent implements OnInit, OnDestroy {
 
+  subscribe:Subscription;
   constructor(private  productDataService:ProductDataService) { 
-
+    this.subscribe=Subscription.EMPTY;
   }
 
   ngOnInit(): void {
   }
 
-  countrySelected:any;
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
+  }
+
+  countrySelected:string="";
 
   changeCountry(event:Event){
     // this.countrySelected=(event.target as HTMLInputElement).value;

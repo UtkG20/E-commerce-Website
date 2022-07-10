@@ -16,26 +16,58 @@ export class SideBarComponent implements OnInit {
   products:any;
   categorymap=new Map();
   brandMap=new Map();
+  categoryCount:number=0;
+
+  // categoryList:{name:string,isChecked:boolean}[]=[];
 
   constructor(private productData:ProductDataService){
     this.products=productData.products;
     for(let i=0;i<productData.products.length;i++){
-      for(let j=0;j<productData.products[i].category.length;j++)
-      this.categorymap.set(productData.products[i].category[j],true);
-
+      for(let j=0;j<productData.products[i].category.length;j++){
+      this.categorymap.set(productData.products[i].category[j],false);
+      }
       this.brandMap.set(productData.products[i].brand,true);
     }
+    // for(let key of this.categorymap.keys()){
+    //   this.categoryList.push({name:key,isChecked:false});
+    // }
   }
 
-  value: number = 300;
-  highValue: number = 600;
+  value: number = 0;
+  highValue: number = 1000;
   options: Options = {
     floor: 0,
     ceil: 1000
   };
 
- 
+ onChange(key:any){
+  if(this.categorymap.get(key)===true){
+  this.categorymap.set(key,false);
+  this.categoryCount--;
+  }
+  else{
+  this.categorymap.set(key,true);
+  this.categoryCount++;
+  }
+  this.productData.setCategory(this.categorymap);
+  this.productData.countCategory(this.categoryCount);
+  console.log(this.categoryCount);
+ }
+ onChangeMinimum(value:any){
+  this.value=value;
+ }
+
+ onChangeMaximum(value:any){
+  this.highValue=value;
+ }
   
+
+//  setRange(value:any,highValue:any){
+//   this.value=value;
+//   this.highValue=highValue;
+//   console.log(this.value);
+//   console.log(this.highValue);
+// }
 
   ngOnInit(): void {
   }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { TestComponent } from './test/test.component';
@@ -12,6 +12,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { MainBarComponent } from './main-bar/main-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { PriceFilterPipe } from './pipes/price-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,9 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
     TopBarComponent,
     SideBarComponent,
     MainBarComponent,
-    BottomBarComponent
+    BottomBarComponent,
+    CategoryFilterPipe,
+    PriceFilterPipe
   ],
   imports: [
     CarouselModule,
@@ -27,7 +31,8 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxSliderModule
+    NgxSliderModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

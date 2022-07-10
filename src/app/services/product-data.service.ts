@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductDataService {
 
-country=new Subject();
+country=new BehaviorSubject('');
+
+categoryMap=new BehaviorSubject(null);
+
+categoryCount=new BehaviorSubject(0);
+
+lowPrice= new BehaviorSubject(0);
+
+highPrice= new BehaviorSubject(1000);
 
   products=[
     {img:"/assets/photos/t-shirt.jpeg",name:"T-Shirt",category:['Mens','Clothing'],brand:'Puma',price:50,countries:['INDIA','USA','CHINA']},
@@ -25,5 +33,18 @@ country=new Subject();
 
   setCountry(country:any){
     this.country.next(country)
+  }
+
+  setCategory(categoryMap:any){
+    this.categoryMap.next(categoryMap);
+  }
+
+  countCategory(categoryCount:any){
+    this.categoryCount.next(categoryCount);
+  }
+
+  setRange(lowPrice:number,highPrice:number){
+    this.lowPrice.next(lowPrice);
+    this.highPrice.next(highPrice);
   }
 }

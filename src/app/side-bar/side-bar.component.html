@@ -1,7 +1,7 @@
 <div style="padding:10px; background-color:aliceblue; border-radius:1%">
 <h3><span>CATEGORY</span></h3>
 <div class="category" *ngFor="let key of categorymap.keys()">
-    <input type="checkbox" id={{key}} name={{key}} value={{key}}>{{key}}<br>
+    <input type="checkbox" id={{key}} name={{key}} value={{key}} (change)="onChange(key)">{{key}}<br>
 </div>
 <h3><span>BRANDS</span></h3>
 <div class="brands" *ngFor="let key of brandMap.keys()">
@@ -10,5 +10,9 @@
 <h3>Price Range</h3>
 <p style="text-align: center;">Use slider to set the price range in $</p>
 <ngx-slider class="slider" [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+<div class="slider-input">
+    <input type="number" (change)="onChangeMinimum(value)" [(ngModel)]="value">
+    <input type="number" (change)="onChangeMaximum(highValue)" [(ngModel)]="highValue">
+</div>
 <img width="90%" [src]="'/assets/photos/shipping-free.jpeg'" alt="free-shipping image">
 </div> 

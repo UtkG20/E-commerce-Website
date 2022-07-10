@@ -34,3 +34,11 @@ img{
     height: 200px;
     
 }
+
+.slider-input{
+    display: flex;
+
+}
+.slider-input input{
+    margin: 10px;
+}
