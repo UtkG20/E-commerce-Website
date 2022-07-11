@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 import { PriceFilterPipe } from './pipes/price-filter.pipe';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { PriceFilterPipe } from './pipes/price-filter.pipe';
     MainBarComponent,
     BottomBarComponent,
     CategoryFilterPipe,
-    PriceFilterPipe
+    PriceFilterPipe,
+    SearchFilterPipe
   ],
   imports: [
     CarouselModule,

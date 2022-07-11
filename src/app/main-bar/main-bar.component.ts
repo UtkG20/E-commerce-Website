@@ -21,6 +21,7 @@ export class MainBarComponent implements OnInit,OnDestroy {
   categoryCount:any;
   lowPrice:any;
   highPrice:any;
+  filterString:any;
 
   ngOnInit(): void {
     this.subscribe = this.productDataService.country.subscribe(data=>{
@@ -41,6 +42,10 @@ export class MainBarComponent implements OnInit,OnDestroy {
 
     this.productDataService.highPrice.subscribe(data=>{
       this.highPrice=data;
+    })
+
+    this.productDataService.filterString.subscribe(data=>{
+      this.filterString=data;
     })
   }
 

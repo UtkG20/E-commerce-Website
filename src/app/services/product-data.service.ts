@@ -16,6 +16,8 @@ lowPrice= new BehaviorSubject(0);
 
 highPrice= new BehaviorSubject(1000);
 
+filterString=new BehaviorSubject('');
+
   products=[
     {img:"/assets/photos/t-shirt.jpeg",name:"T-Shirt",category:['Mens','Clothing'],brand:'Puma',price:50,countries:['INDIA','USA','CHINA']},
     {img:"/assets/photos/tablet.jpeg",name:"Tablet",category:['Technology','Clothing'],brand:'Samsung',price:500,countries:['INDIA','SPAIN','CHINA']},
@@ -25,7 +27,7 @@ highPrice= new BehaviorSubject(1000);
     {img:"/assets/photos/scul-bag.jpeg",name:"School Bags",category:['Bags','Kids'],brand:'American Tourister',price:55,countries:['INDIA','USA']},
     {img:"/assets/photos/purse.jpeg",name:"Purse",category:['Women','Bags'],brand:'Skybags',price:45,countries:['INDIA','USA','SPAIN']},
     {img:"/assets/photos/men-cloth.jpeg",name:"Shirt",category:['Mens','Clothing'],brand:'Peter England',price:50,countries:['INDIA','USA','CHINA','SPAIN']},
-    {img:"/assets/photos/girl-top.jpeg",name:"Girld Top",category:['Women','Clothing'],brand:'Roadster',price:40,countries:['USA']},
+    {img:"/assets/photos/girl-top.jpeg",name:"Girl's Top",category:['Women','Clothing'],brand:'Roadster',price:40,countries:['USA']},
     {img:"/assets/photos/frock.jpeg",name:"Frock",category:['Kids','Clothing'],brand:'Nykaa',price:45,countries:['SPAIN','USA','CHINA']},
     {img:"/assets/photos/cupboard.jpeg",name:"CupBoard",category:['Household','Interior'],brand:'Puma',price:450,countries:['USA','CHINA']}
   ]
@@ -43,8 +45,14 @@ highPrice= new BehaviorSubject(1000);
     this.categoryCount.next(categoryCount);
   }
 
-  setRange(lowPrice:number,highPrice:number){
+  setLowRange(lowPrice:any){
     this.lowPrice.next(lowPrice);
+  }
+  setHighRange(highPrice:any){
     this.highPrice.next(highPrice);
+  }
+
+  searchString(filterString:any){
+    this.filterString.next(filterString);
   }
 }

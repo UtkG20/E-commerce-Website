@@ -37,8 +37,10 @@ img{
 
 .slider-input{
     display: flex;
+    justify-content: space-around;
 
 }
 .slider-input input{
     margin: 10px;
+    width: 60px;
 }

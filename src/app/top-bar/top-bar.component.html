@@ -49,8 +49,8 @@
   <a href="#">Contact</a>
 </section>
 <section class="u1">
-  <input type="text" placeholder=" Type to search">
-  <button><i class="fa-solid fa-magnifying-glass"></i></button>
+  <input type="text" placeholder=" Type to search" [(ngModel)]="filterString" #string>
+  <button (click)="onSearch(string)"><i class="fa-solid fa-magnifying-glass"></i></button>
 </section>
   
 </nav>

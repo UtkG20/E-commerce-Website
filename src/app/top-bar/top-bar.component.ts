@@ -22,10 +22,15 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   countrySelected:string="";
+  filterString:string='';
 
   changeCountry(event:Event){
     // this.countrySelected=(event.target as HTMLInputElement).value;
     this.productDataService.setCountry((event.target as HTMLInputElement).value)
+  }
+
+  onSearch(value:any){
+    this.productDataService.searchString(value.value)
   }
 
   customOptions: OwlOptions = {
