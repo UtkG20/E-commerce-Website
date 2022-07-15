@@ -1,0 +1,15 @@
+.row{
+    display:flex;
+    /* flex-wrap: wrap; */
+    flex-direction: row;
+}
+.side{
+    justify-content:start;
+    flex: 25%;
+    padding: 10px;
+}
+.main{
+    justify-content: end;
+    flex:75%;
+    padding: 10px;
+}

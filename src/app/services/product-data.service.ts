@@ -18,6 +18,10 @@ highPrice= new BehaviorSubject(1000);
 
 filterString=new BehaviorSubject('');
 
+users=new BehaviorSubject([{}]);
+
+currentUser =new BehaviorSubject('');
+
   products=[
     {img:"/assets/photos/t-shirt.jpeg",name:"T-Shirt",category:['Mens','Clothing'],brand:'Puma',price:50,countries:['INDIA','USA','CHINA']},
     {img:"/assets/photos/tablet.jpeg",name:"Tablet",category:['Technology','Clothing'],brand:'Samsung',price:500,countries:['INDIA','SPAIN','CHINA']},
@@ -31,7 +35,18 @@ filterString=new BehaviorSubject('');
     {img:"/assets/photos/frock.jpeg",name:"Frock",category:['Kids','Clothing'],brand:'Nykaa',price:45,countries:['SPAIN','USA','CHINA']},
     {img:"/assets/photos/cupboard.jpeg",name:"CupBoard",category:['Household','Interior'],brand:'Puma',price:450,countries:['USA','CHINA']}
   ]
-  constructor() { }
+
+  productMap=new Map();
+
+  
+  constructor() {
+    for(let i=0;i<this.products.length;i++){
+      this.productMap.set(i+1,this.products[i])
+    }
+    for(let i=0;i<this.productMap.size;i++){
+      console.log(this.productMap.get(i+1));
+    }
+   }
 
   setCountry(country:any){
     this.country.next(country)
@@ -54,5 +69,14 @@ filterString=new BehaviorSubject('');
 
   searchString(filterString:any){
     this.filterString.next(filterString);
+  }
+
+  setUser(users:any){
+    this.users.next(users);
+    console.log(this.users);
+  }
+
+  setCurrentUser(currentUser:any){
+    this.currentUser.next(currentUser);
   }
 }

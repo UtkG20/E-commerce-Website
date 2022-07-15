@@ -15,6 +15,9 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 import { PriceFilterPipe } from './pipes/price-filter.pipe';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { LoginComponent } from './login/login.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,10 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     BottomBarComponent,
     CategoryFilterPipe,
     PriceFilterPipe,
-    SearchFilterPipe
+    SearchFilterPipe,
+    LoginComponent,
+    CreateAccountComponent,
+    HomeComponent
   ],
   imports: [
     CarouselModule,

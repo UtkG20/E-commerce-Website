@@ -10,11 +10,21 @@ import { Subscription } from 'rxjs';
 export class TopBarComponent implements OnInit, OnDestroy {
 
   subscribe:Subscription;
+  Accounts:any;
+  currentUser:any;
   constructor(private  productDataService:ProductDataService) { 
     this.subscribe=Subscription.EMPTY;
   }
 
   ngOnInit(): void {
+
+  this.productDataService.users.subscribe(data=>{
+    this.Accounts=data;
+  })
+
+  this.productDataService.currentUser.subscribe(data=>{
+    this.currentUser=data;
+  })
   }
 
   ngOnDestroy() {
