@@ -3,11 +3,11 @@
         <h1>Login</h1>
     </div>
     <div class="u-p">
-        <input type="text" placeholder="Username" style="padding: 5px; margin: 10px;">
-        <input type="password" placeholder="Password" style="padding: 5px; margin: 10px;">
+        <input type="text" placeholder="Username" style="padding: 5px; margin: 10px;" #uname>
+        <input type="password" placeholder="Password" style="padding: 5px; margin: 10px;" #pword>
     </div>
 
     <span style="text-align: center; margin: 5px;">New User?<a routerLink="create">Create Account</a></span>
-    <button type="submit" style="padding:10px ;  margin: 5px;">Login</button>
+    <button type="submit" (click)="loginUser(uname,pword)" style="padding:10px ;  margin: 5px;">Login</button>
     
 </div>

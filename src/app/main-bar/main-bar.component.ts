@@ -10,8 +10,11 @@ import { ProductDataService } from '../services/product-data.service';
 export class MainBarComponent implements OnInit,OnDestroy {
 
  products:any;
+ productMap:any;
+ 
   constructor(private productData:ProductDataService, private productDataService:ProductDataService) { 
     this.products=productData.products;
+    this.productMap=productData.productMap;
     this.subscribe= Subscription.EMPTY;
   }
   subscribe:Subscription;
@@ -22,6 +25,7 @@ export class MainBarComponent implements OnInit,OnDestroy {
   lowPrice:any;
   highPrice:any;
   filterString:any;
+  currentUser:any;
   
 
   ngOnInit(): void {
@@ -49,6 +53,9 @@ export class MainBarComponent implements OnInit,OnDestroy {
       this.filterString=data;
     })
 
+    this.productDataService.currentUser.subscribe(data=>{
+      this.currentUser=data;
+    })
   }
 
   ngOnDestroy(){
@@ -64,6 +71,23 @@ export class MainBarComponent implements OnInit,OnDestroy {
 
       }
     }
+  }
+
+  addToCart(key:any){
+    console.log(this.currentUser)
+    let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
+    if(!variable.cart.includes(this.productMap.get(key)))
+      variable.cart.push(this.productMap.get(key));
+    localStorage.setItem(this.currentUser,JSON.stringify(variable));
+    console.log(variable);
+  }
+
+  addToWishlist(key:any){
+    console.log(this.currentUser)
+    let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
+    variable.wishlist.push(this.productMap.get(key));
+    localStorage.setItem(this.currentUser,JSON.stringify(variable));
+    console.log(variable);
   }
 
   id:any="open";

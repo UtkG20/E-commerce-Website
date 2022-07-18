@@ -18,6 +18,7 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { HomeComponent } from './home/home.component';
+import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { HomeComponent } from './home/home.component';
     SearchFilterPipe,
     LoginComponent,
     CreateAccountComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     CarouselModule,

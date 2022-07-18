@@ -32,12 +32,19 @@ export class CreateAccountComponent implements OnInit {
   count:any=0;
 
   addUser(username:any,password:any){
-    this.Accounts.push({username:username.value,password:password.value,cart:[]});
-    
-    this.productData.setUser(this.Accounts);
-    this.productData.setCurrentUser(username.value);
-    this.router.navigate(['home']);
-    console.log(this.Accounts);
+    if(localStorage.getItem(username.value)){
+      alert('Username already exist.Please enter a valid username');
+      return;
+    }
+    else{
+      // this.Accounts.push({username:username.value,password:password.value,cart:[]});
+      let data={username:username.value,password:password.value,cart:[],wishlist:[]}
+      localStorage.setItem(username.value,JSON.stringify(data))
+      
+      this.productData.setUser(this.Accounts);
+      this.productData.setCurrentUser(username.value);
+      this.router.navigate(['home']);
+    }
   }
 
   ngOnInit(): void {

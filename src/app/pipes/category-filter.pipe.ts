@@ -6,14 +6,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CategoryFilterPipe implements PipeTransform {
 
   transform(value:any, selectedCategories:any , countCategory:any) {
-    if(countCategory==0||value.length===0)
-    return value;
-
-    const products=[];
-    for(const product of value){
-      for(const category of product.category){
+    if(countCategory==0||value.size===0){
+      return value;
+  }
+    let products=new Map();
+    for(const key of value.keys()){
+      for(const category of value.get(key).category){
         if(selectedCategories.get(category)===true){
-        products.push(product);
+        products.set(key,value.get(key));
+        console.log(products);
         break;
         }
       }

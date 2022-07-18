@@ -12,6 +12,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   subscribe:Subscription;
   Accounts:any;
   currentUser:any;
+  
   constructor(private  productDataService:ProductDataService) { 
     this.subscribe=Subscription.EMPTY;
   }

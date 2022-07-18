@@ -19,18 +19,18 @@
 </div> -->
 <div *ngIf="id==='open'">
     <div class="collage">
-        <div  *ngFor="let product of products | categoryFilter: selectedCategories : categoryCount | priceFilter: lowPrice : highPrice | searchFilter : filterString">
-            <div  *ngFor="let country of product.countries">
+        <div  *ngFor="let key of (productMap| categoryFilter: selectedCategories : categoryCount | priceFilter: lowPrice : highPrice |searchFilter : filterString).keys() ">
+            <div  *ngFor="let country of productMap.get(key).countries">
                 <div *ngIf="country===selectedCountry">
                     
-                        <div class="p1">
-                            <img class="img-set" src={{product.img}} alt="Image of product" width="190px">
-                            <h2 class="prc">price:{{product.price}}$</h2>
-                            <h4 class="nm">{{product.name}}</h4>
-                            <button style="margin:2px ; width: 100px;">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
-                            <br>
-                            <span><button style="margin-top:5px ;">Add to wishlist <i class="fa-solid fa-star"></i></button></span>
-                        </div>
+                    <div class="p1">
+                        <img class="img-set" src={{productMap.get(key).img}} alt="Image of product" width="190px">
+                        <h2 class="prc">price:{{productMap.get(key).price}}$</h2>
+                        <h4 class="nm">{{productMap.get(key).name}}</h4>
+                        <button style="margin:2px ; width: 100px;" (click)="addToCart(key)">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+                        <br>
+                        <span><button style="margin-top:5px ;" (click)="addToWishlist(key)">Add to wishlist <i class="fa-solid fa-star"></i></button></span>
+                    </div>
 
                 </div>
 

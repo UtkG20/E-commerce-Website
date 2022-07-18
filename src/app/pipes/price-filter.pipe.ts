@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PriceFilterPipe implements PipeTransform {
 
   transform(value:any,lowPrice:any,highPrice:any){
-    const products=[];
-    for (const product of value){
-        if(product.price>=lowPrice && product.price<=highPrice)
-        products.push(product);
+    let products=new Map();
+    for (let key of value.keys()){
+        if(value.get(key).price>=lowPrice && value.get(key).price<=highPrice)
+        products.set(key,value.get(key));
    }
     return products;
  }
