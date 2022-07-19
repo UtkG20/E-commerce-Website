@@ -12,11 +12,33 @@ export class CartComponent implements OnInit {
   cartMap=new Map();
   variable:any;
   currentUser:any;
+  productMap:any;
   q=1;
   constructor(public router:Router, private productDataService: ProductDataService) {
+    this.productMap=productDataService.productMap;
+    console.log(this.iprice)
     
   }
 
+  iprice=document.getElementsByClassName('iprice');
+  iquantity=document.getElementsByClassName('iquantity');
+  gt:number=0;
+
+  grandTotal(){
+    console.log(this.iprice.length);
+    for(let i=0;i<this.iprice.length;i++){
+      console.log('hi');
+      let temp1=this.iprice[i].innerHTML;
+      console.log(this.iprice)
+      let temp2=this.iquantity[i].innerHTML;
+      this.gt=this.gt+(Number(temp1)*Number(temp2));
+      console.log(this.iprice[i].innerHTML)
+    }
+    console.log(this.gt);
+  }
+
+  
+  
   changeQuantity(event:Event){
     this.q=+(event.target as HTMLInputElement).value;
   }
@@ -30,14 +52,13 @@ export class CartComponent implements OnInit {
     console.log(this.cartMap);
   
     for(let i=0;i<this.variable.cart.length;i++){
-      if(this.variable.cart[i]===key){
+      if(this.variable.cart[i]==key){
         console.log('hmm');
         this.variable.cart.splice(i,1);
         break;
       }
-      localStorage.setItem(this.currentUser,JSON.stringify(this.variable));
     }
-    
+    localStorage.setItem(this.currentUser,JSON.stringify(this.variable));
   }
 
   
@@ -53,7 +74,7 @@ export class CartComponent implements OnInit {
 
     for(let item of this.variable.cart){
       console.log(item);
-      if(this.cartMap.has(item))
+      if(!this.cartMap.has(item))
         this.cartMap.set(item,1);
       else{
         console.log('h');
@@ -62,6 +83,7 @@ export class CartComponent implements OnInit {
       }
     }
     console.log(this.cartMap);
+    this.grandTotal();
   }
 
 }

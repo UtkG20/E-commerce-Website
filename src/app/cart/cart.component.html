@@ -1,4 +1,7 @@
 <p>cart works!</p>
+<!-- <script>
+    document.getElementById("quantity").defaultValue=1;
+</script> -->
 <div>
     <h1>My shopping cart</h1>
     <table border="1">
@@ -9,15 +12,31 @@
             <th>Subtotal</th>
         </tr>
         <tr *ngFor="let key of cartMap.keys()">
-            <th><img class="cart-image" src={{key.img}} alt="image of your selected product"></th>
-            <th>{{key.name}}</th>
+            <th><img class="cart-image" src={{productMap.get(key).img}} alt="image of your selected product"></th>
+            <th>{{productMap.get(key).name}}</th>
             <th><button (click)="removeProduct(key)">Remove</button></th>
-            <th>{{key.price}}</th>
-            <th><input style="width:50px;margin:10px;" type="number" placeholder="{{cartMap.get(key)}}" (change)="changeQuantity($event)" [(ngModel)]="q" #quantity></th>
-            <th><span *ngIf="true">{{+quantity.value*key.price}}</span></th>
+            <th><input type="hidden" class="iprice" value="{{productMap.get(key).price}}">{{productMap.get(key).price}}</th>
+            <th><input style="width:50px;margin:10px;" type="number" class="iquantity" min="1" value="1" (change)="changeQuantity($event)" #quantity></th>
+            <th><span>{{+quantity.value*productMap.get(key).price}}</span></th>
+            
         </tr>
         <tr>
-            <th colspan="5"> Subtotal</th>
+            <th colspan="4"> Grandtotal</th>
+            <th><button (click)="grandTotal()">Result</button></th>
+            <th class="itotal"></th>
         </tr>
+        <script>
+            console.log('hello script')
+            let iprice=document.getElementsByClassName('iprice')
+            let iquantity=document.getElementsByClassName('iquantity')
+            let itotal=document.getElementsByClassName('itotal')
+        
+            function subtotal(){
+                for(i=0;i<iprice.length;i++){
+                    itotal[i].innerText=(iprice[i].value)*(iquantity[i].value)
+                }
+            }
+            subtotal();
+        </script>
     </table>
 </div>

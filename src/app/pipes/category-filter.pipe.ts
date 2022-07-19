@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CategoryFilterPipe implements PipeTransform {
 
   transform(value:any, selectedCategories:any , countCategory:any) {
+    console.log(selectedCategories);
     if(countCategory==0||value.size===0){
       return value;
   }
