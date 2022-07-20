@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { CartComponent } from './cart/cart.component';
     LoginComponent,
     CreateAccountComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    WishlistComponent
   ],
   imports: [
     CarouselModule,

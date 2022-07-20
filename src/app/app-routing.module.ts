@@ -4,6 +4,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,14 @@ const routes: Routes = [
   },
   {
     path:'home/cart',
+    component:CartComponent
+  },
+  {
+    path:'home/wishlist',
+    component:WishlistComponent
+  },
+  {
+    path:'home/wishlist/cart',
     component:CartComponent
   }
 ];

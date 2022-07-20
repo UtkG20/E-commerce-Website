@@ -38,7 +38,7 @@ export class CreateAccountComponent implements OnInit {
     }
     else{
       // this.Accounts.push({username:username.value,password:password.value,cart:[]});
-      let data={username:username.value,password:password.value,cart:[],wishlist:[]}
+      let data={username:username.value,password:password.value,cart:[],wishlist:[],quantities:[]}
       localStorage.setItem(username.value,JSON.stringify(data))
       
       this.productData.setUser(this.Accounts);

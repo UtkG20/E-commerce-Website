@@ -13,52 +13,58 @@ export class CartComponent implements OnInit {
   variable:any;
   currentUser:any;
   productMap:any;
-  q=1;
+  // quantityArray:any;
   constructor(public router:Router, private productDataService: ProductDataService) {
     this.productMap=productDataService.productMap;
-    console.log(this.iprice)
+    // this.quantityArray=
+    // console.log(this.iprice)
     
   }
 
-  iprice=document.getElementsByClassName('iprice');
-  iquantity=document.getElementsByClassName('iquantity');
+  // iprice=document.getElementsByClassName('iprice');
+  // iquantity=document.getElementsByClassName('iquantity');
   gt:number=0;
 
   grandTotal(){
-    console.log(this.iprice.length);
-    for(let i=0;i<this.iprice.length;i++){
-      console.log('hi');
-      let temp1=this.iprice[i].innerHTML;
-      console.log(this.iprice)
-      let temp2=this.iquantity[i].innerHTML;
-      this.gt=this.gt+(Number(temp1)*Number(temp2));
-      console.log(this.iprice[i].innerHTML)
-    }
+    // console.log(this.iprice.length);
+    // for(let i=0;i<this.iprice.length;i++){
+    //   console.log('hi');
+    //   let temp1=this.iprice[i].innerHTML;
+    //   console.log(this.iprice)
+    //   let temp2=this.iquantity[i].innerHTML;
+    //   this.gt=this.gt+(Number(temp1)*Number(temp2));
+    //   console.log(this.iprice[i].innerHTML)
+    // }
+    this.gt=0;
     console.log(this.gt);
+    let variable=JSON.parse(localStorage.getItem(this.currentUser)!);
+    for(let i=0;i<variable.cart.length;i++){
+      this.gt+=((variable.quantities[i])*(this.productMap.get(variable.cart[i]).price));
+    }
   }
 
   
   
-  changeQuantity(event:Event){
-    this.q=+(event.target as HTMLInputElement).value;
+  changeQuantity(event:Event,key:any){
+    let q=+(event.target as HTMLInputElement).value;
+    let variable=JSON.parse(localStorage.getItem(this.currentUser)!);
+    let index=(this.variable.cart.indexOf(key));
+    console.log(q);
+    variable.quantities[index]=q;
+    localStorage.setItem(this.currentUser,JSON.stringify(variable));
+    this.grandTotal();
   }
 
   removeProduct(key:any){
     // localStorage.getItem(key)
     // this.cartMap.delete(key);
-    this.variable=JSON.parse(localStorage.getItem(this.currentUser)!);
-    console.log(key);
+    let variable=JSON.parse(localStorage.getItem(this.currentUser)!);
+    let index=(this.variable.cart.indexOf(key));
+    variable.quantities.splice(index,1);
+    variable.cart.splice(index,1)
     this.cartMap.delete(key);
-    console.log(this.cartMap);
-  
-    for(let i=0;i<this.variable.cart.length;i++){
-      if(this.variable.cart[i]==key){
-        console.log('hmm');
-        this.variable.cart.splice(i,1);
-        break;
-      }
-    }
-    localStorage.setItem(this.currentUser,JSON.stringify(this.variable));
+    console.log(variable);
+    localStorage.setItem(this.currentUser,JSON.stringify(variable));
   }
 
   

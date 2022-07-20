@@ -1,0 +1,27 @@
+<p>wishlist works!</p>
+<div>
+    <h1>Your Wishlist</h1>
+    <table border="1">
+        <tr>
+            <th colspan="4">Products</th>
+            <th>Price</th>
+            <!-- <th>Quantity</th> -->
+            <!-- <th>Subtotal</th> -->
+        </tr>
+        <tr *ngFor="let key of cartMap.keys()">
+            <th><img class="cart-image" src={{productMap.get(key).img}} alt="image of your selected product"></th>
+            <th>{{productMap.get(key).name}}</th>
+            <th><button (click)="removeProduct(key)">Remove</button></th>
+            <th><button (click)="addToCart(key)">Add to Cart</button></th>
+            <th><input type="hidden" [innerText]="productMap.get(key).price" class="iprice" value="{{productMap.get(key).price}}">{{productMap.get(key).price}}</th>
+            <!-- <th><input style="width:50px;margin:10px;" type="number" class="iquantity" min="1" value="1" (change)="changeQuantity($event,key)" #quantity></th> -->
+            <!-- <th><span>{{+quantity.value*productMap.get(key).price}}</span></th> -->
+            
+        </tr>
+        <!-- <tr>
+            <th colspan="5"> Grandtotal</th>
+            <th><button (click)="grandTotal()">Result</button></th>
+            <th class="itotal">{{gt}}</th>
+        </tr> -->
+    </table>
+</div>

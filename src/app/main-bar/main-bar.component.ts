@@ -76,8 +76,10 @@ export class MainBarComponent implements OnInit,OnDestroy {
   addToCart(key:any){
     console.log(this.currentUser)
     let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
-    if(!variable.cart.includes(key))
+    if(!variable.cart.includes(key)){
       variable.cart.push(key);
+      variable.quantities.push(1);
+    }
     localStorage.setItem(this.currentUser,JSON.stringify(variable));
     console.log(variable);
   }
@@ -85,7 +87,7 @@ export class MainBarComponent implements OnInit,OnDestroy {
   addToWishlist(key:any){
     console.log(this.currentUser)
     let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
-    if(!variable.cart.includes((key)))
+    if(!variable.wishlist.includes(key))
       variable.wishlist.push((key));
     localStorage.setItem(this.currentUser,JSON.stringify(variable));
     console.log(variable);
