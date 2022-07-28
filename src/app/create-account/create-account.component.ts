@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {HttpClient} from"@angular/common/http";
 import{ ProductDataService} from '../services/product-data.service';
 
 @Component({
@@ -9,7 +10,7 @@ import{ ProductDataService} from '../services/product-data.service';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor(public router: Router,private productData:ProductDataService) { }
+  constructor(public router: Router,private productData:ProductDataService, private http:HttpClient) { }
 
 
   Accounts=[
@@ -31,6 +32,13 @@ export class CreateAccountComponent implements OnInit {
   ];
   count:any=0;
 
+  onSubmit(data:any){
+    console.log(data);
+    this.http.post("http://localhost:4000/user/signup",data)
+    .subscribe(result=>{
+      console.warn('result',result)
+    })
+  }
   addUser(username:any,password:any){
     if(localStorage.getItem(username.value)){
       alert('Username already exist.Please enter a valid username');

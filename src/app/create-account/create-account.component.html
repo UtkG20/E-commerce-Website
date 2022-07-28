@@ -1,5 +1,5 @@
 
-<div class="login-box">
+<!-- <div class="login-box">
     <div class="tp">
         <h1>Create Account</h1>
     </div>
@@ -11,4 +11,20 @@
     <span style="text-align: center; margin: 5px;">Already have an account?<a routerLink="">Login</a></span>
     <button type="submit" style="padding:10px ;  margin: 5px;" (click)="addUser(uname,pword)">Submit</button>
     
+</div> -->
+
+<div class="login-box">
+    <div class="tp">
+        <h1>Create Account</h1>
+    </div>
+    <form #userDetails="ngForm" (ngSubmit)="onSubmit(userDetails.value)">
+        <div class="u-p">
+            <input type="text" name="username" ngModel placeholder="Enter Username" style="padding: 5px; margin: 10px;" >
+            <input type="password" name="password" ngModel placeholder="Create Password" style="padding: 5px; margin: 10px;">
+        </div>
+        <div style="display:flex ;flex-direction:column; justify-content:center;">
+            <span style="text-align: center; margin: 5px;">Already have an account?<a routerLink="">Login</a></span>
+            <button type="submit" style="padding:10px ;  margin: 5px;">Submit</button>
+        </div>
+    </form>
 </div>
