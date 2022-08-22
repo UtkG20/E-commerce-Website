@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,8 @@ users=new BehaviorSubject([{}]);
 
 currentUser =new BehaviorSubject('');
 
+currentID=new BehaviorSubject('');
+
   products=[
     {id:1,img:"/assets/photos/t-shirt.jpeg",name:"T-Shirt",category:['Mens','Clothing'],brand:'Puma',price:50,countries:['INDIA','USA','CHINA']},
     {id:2,img:"/assets/photos/tablet.jpeg",name:"Tablet",category:['Technology','Clothing'],brand:'Samsung',price:500,countries:['INDIA','SPAIN','CHINA']},
@@ -39,7 +42,7 @@ currentUser =new BehaviorSubject('');
   productMap=new Map();
 
   
-  constructor() {
+  constructor(private http:HttpClient) {
     for(let i=0;i<this.products.length;i++){
       this.productMap.set(this.products[i].id,this.products[i])
       // console.log(this.productMap);
@@ -53,6 +56,10 @@ currentUser =new BehaviorSubject('');
     this.country.next(country)
   }
 
+
+  productFromAPI(){
+    return this.http.get("http://localhost:4000/products")
+  }
   setCategory(categoryMap:any){
     this.categoryMap.next(categoryMap);
   }
@@ -79,5 +86,9 @@ currentUser =new BehaviorSubject('');
 
   setCurrentUser(currentUser:any){
     this.currentUser.next(currentUser);
+  }
+
+  setCurrentID(currentID:string){
+    this.currentID.next(currentID);
   }
 }

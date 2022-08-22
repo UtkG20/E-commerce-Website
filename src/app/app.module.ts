@@ -20,6 +20,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { CountryFilterPipe } from './pipes/country-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     CreateAccountComponent,
     HomeComponent,
     CartComponent,
-    WishlistComponent
+    WishlistComponent,
+    CountryFilterPipe
   ],
   imports: [
     CarouselModule,

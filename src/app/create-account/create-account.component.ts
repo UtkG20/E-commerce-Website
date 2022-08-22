@@ -34,9 +34,22 @@ export class CreateAccountComponent implements OnInit {
 
   onSubmit(data:any){
     console.log(data);
+    if(data.username===''||data.password===''){
+      alert("please fill all the required fields")
+      return
+    }
+    
     this.http.post("http://localhost:4000/user/signup",data)
-    .subscribe(result=>{
-      console.warn('result',result)
+    .subscribe((result:any)=>{
+        // const temp=JSON.parse(JSON.stringify(result))
+        // console.log(Object.keys(temp))
+        console.log(result)
+        alert('User registered.Now you will be directed to login page')
+        this.router.navigate(['']);
+    },
+    (error:any)=>{
+      console.log(error.error.message);
+      alert(error.error.message)
     })
   }
   addUser(username:any,password:any){

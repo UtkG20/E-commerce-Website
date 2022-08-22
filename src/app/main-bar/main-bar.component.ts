@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
 import { ProductDataService } from '../services/product-data.service';
@@ -12,8 +14,13 @@ export class MainBarComponent implements OnInit,OnDestroy {
  products:any;
  productMap:any;
  
-  constructor(private productData:ProductDataService, private productDataService:ProductDataService) { 
-    this.products=productData.products;
+  constructor(private productData:ProductDataService, private productDataService:ProductDataService,private http:HttpClient) { 
+    this.productData.productFromAPI().subscribe(data=>{
+      console.log("data",data);
+      this.products=data;
+      console.log(this.products)
+    })
+    // this.products=productData.products
     this.productMap=productData.productMap;
     this.subscribe= Subscription.EMPTY;
   }
@@ -26,6 +33,7 @@ export class MainBarComponent implements OnInit,OnDestroy {
   highPrice:any;
   filterString:any;
   currentUser:any;
+  currentID:string;
   
 
   ngOnInit(): void {
@@ -56,41 +64,95 @@ export class MainBarComponent implements OnInit,OnDestroy {
     this.productDataService.currentUser.subscribe(data=>{
       this.currentUser=data;
     })
+
+    this.productDataService.currentID.subscribe(data=>{
+      this.currentID=data;
+    })
   }
 
   ngOnDestroy(){
       this.subscribe.unsubscribe();
   }
 
-  countryFilter(){
-    for(let i=0;i<this.products.length;i++){
-      for(let j=0;j<this.products[i].countries.length;j++){
-        if(this.products[i].countries[j]===this.selectedCountry){
+  // countryFilter(){
+  //   for(let i=0;i<this.products.length;i++){
+  //     for(let j=0;j<this.products[i].countries.length;j++){
+  //       if(this.products[i].countries[j]===this.selectedCountry){
           
-        }
+  //       }
 
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 
   addToCart(key:any){
-    console.log(this.currentUser)
-    let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
-    if(!variable.cart.includes(key)){
-      variable.cart.push(key);
-      variable.quantities.push(1);
-    }
-    localStorage.setItem(this.currentUser,JSON.stringify(variable));
-    console.log(variable);
+    // console.log(key)
+    // console.log('http://localhost:4000/user/'+this.currentID);
+    this.http.get('http://localhost:4000/user/'+this.currentID)
+    .subscribe((result:any)=>{
+      console.log(result.userByID.cart);
+      let tempCart=result.userByID.cart;
+      
+      if(!tempCart.includes(key)){
+        tempCart.push(key);
+        let tempQuant=result.userByID.quantities;
+        console.warn('quantity',tempQuant);
+        tempQuant.push(1);
+        console.log(tempCart);
+        console.log(tempQuant);
+          this.http.patch('http://localhost:4000/user/cart/'+this.currentID,{cart:tempCart})
+          .subscribe((result:any)=>{
+            alert('item added to cart');
+          },(err:any)=>{
+            alert(err);
+          })
+          this.http.patch('http://localhost:4000/user/quant/'+this.currentID,{quantities:tempQuant})
+          .subscribe((result:any)=>{
+            console.warn('prevRes',result);
+          },(err:any)=>{
+            console.warn('error',err);
+          })
+        }else{
+          alert('item already present in your cart')
+        }
+    },(err:any)=>{
+      alert(err);
+    })
+    // let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
+    // if(!variable.cart.includes(key)){
+    //   variable.cart.push(key);
+    //   variable.quantities.push(1);
+    // }
+    // localStorage.setItem(this.currentUser,JSON.stringify(variable));
+    // console.log(variable);
   }
 
   addToWishlist(key:any){
-    console.log(this.currentUser)
-    let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
-    if(!variable.wishlist.includes(key))
-      variable.wishlist.push((key));
-    localStorage.setItem(this.currentUser,JSON.stringify(variable));
-    console.log(variable);
+    this.http.get('http://localhost:4000/user/'+this.currentID)
+    .subscribe((result:any)=>{
+      console.log(result.userByID.wishlist);
+      let tempWishlist=result.userByID.wishlist;
+      if(!tempWishlist.includes(key)){
+        tempWishlist.push(key);
+        console.log(tempWishlist);
+          this.http.patch('http://localhost:4000/user/wishlist/'+this.currentID,{wishlist:tempWishlist})
+          .subscribe((result:any)=>{
+            alert('item added to wishlist');
+          },(err:any)=>{
+            alert(err);
+          })
+        }else{
+          alert('item already present in your wishlist')
+        }
+    },(err:any)=>{
+      alert(err);
+    })
+    // console.log(this.currentUser)
+    // let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
+    // if(!variable.wishlist.includes(key))
+    //   variable.wishlist.push((key));
+    // localStorage.setItem(this.currentUser,JSON.stringify(variable));
+    // console.log(variable);
   }
 
   id:any="open";

@@ -2,6 +2,10 @@
 <!-- <script>
     document.getElementById("quantity").defaultValue=1;
 </script> -->
+<!-- <div *ngFor="let id of cartArrayOfID">
+    <p>{{id}}</p>
+    <p>1</p>
+</div> -->
 <div>
     <h1>My shopping cart</h1>
     <table border="1">
@@ -11,7 +15,7 @@
             <th>Quantity</th>
             <th>Subtotal</th>
         </tr>
-        <tr *ngFor="let key of cartMap.keys()">
+        <!-- <tr *ngFor="let key of cartMap.keys()">
             <th><img class="cart-image" src={{productMap.get(key).img}} alt="image of your selected product"></th>
             <th>{{productMap.get(key).name}}</th>
             <th><button (click)="removeProduct(key)">Remove</button></th>
@@ -19,7 +23,18 @@
             <th><input style="width:50px;margin:10px;" type="number" class="iquantity" min="1" value="1" (change)="changeQuantity($event,key)" #quantity></th>
             <th><span>{{+quantity.value*productMap.get(key).price}}</span></th>
             
-        </tr>
+        </tr> -->
+        <ng-container *ngFor="let item of cartArrayOfProduct;let i=index">
+            <tr>
+                <th><img class="cart-image" src={{item.img}} alt="image of your selected product"></th>
+                <th>{{item.name}}</th>
+                <th><button (click)="removeProduct(item)">Remove</button></th>
+                <th><input type="hidden" [innerText]="item.price" class="iprice" value="{{item.price}}">{{item.price}}</th>
+                <th><input style="width:50px;margin:10px;" type="number" class="iquantity" min="1" value={{cartQuantityArray[i]}} (change)="changeQuantity($event,item._id)" #quantity></th>
+                <th><span>{{+quantity.value*item.price}}</span></th>
+                
+            </tr>
+        </ng-container>
         <tr>
             <th colspan="5"> Grandtotal</th>
             <!-- <th><button (click)="grandTotal()">Result</button></th> -->

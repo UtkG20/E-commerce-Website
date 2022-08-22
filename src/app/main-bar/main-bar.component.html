@@ -1,4 +1,4 @@
-<div style="background-color:rgb(247, 246, 243) ; padding: 10px; border-radius:1% ;" >
+<!-- <div style="background-color:rgb(247, 246, 243) ; padding: 10px; border-radius:1% ;" >
 <span><i class="fa-solid fa-angle-up" (click)="collapse('open')" [class.icon]="id===''"></i></span>
 <h3 ><span class="mainhead">FEATURE ITEMS</span></h3>
 <!-- <div class="collage" *ngIf="id==='open'" >
@@ -17,7 +17,7 @@
 
 
 </div> -->
-<div *ngIf="id==='open'">
+<!-- <div *ngIf="id==='open'">
     <div class="collage">
         <div  *ngFor="let key of (productMap| categoryFilter: selectedCategories : categoryCount | priceFilter: lowPrice : highPrice |searchFilter : filterString).keys() ">
             <div  *ngFor="let country of productMap.get(key).countries">
@@ -39,13 +39,34 @@
         </div>
     </div>
 </div>
-</div>
+</div>  -->
+
+<div style="background-color:rgb(247, 246, 243) ; padding: 10px; border-radius:1% ;" >
+    <span><i class="fa-solid fa-angle-up" (click)="collapse('open')" [class.icon]="id===''"></i></span>
+    <h3 ><span class="mainhead">FEATURE ITEMS</span></h3>
+    <div *ngIf="id==='open'">
+        <div class="collage">
+            <div  *ngFor="let product of (products.products|countryFilter: selectedCountry| categoryFilter: selectedCategories : categoryCount| priceFilter: lowPrice : highPrice |searchFilter : filterString ) ">
+                <div class="p1">
+                    <img class="img-set" src={{product.img}} alt="Image of product" width="190px">
+                    <h2 class="prc">price:{{product.price}}$</h2>
+                    <h4 class="nm">{{product.name}}</h4>
+                    <button style="margin:2px ; width: 100px;" (click)="addToCart(product._id)">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    <br>
+                    <span><button style="margin-top:5px ;" (click)="addToWishlist(product._id)">Add to wishlist <i class="fa-solid fa-star"></i></button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
 
 <div style="background-color:#f9f9fc ;border-radius: 1%;padding: 5px;padding-left:20px; margin-top: 10px; max-width: 96%;">
     <h3 ><span class="mainhead">RECOMMENDED ITEMS</span></h3>
     <div class="recommended">
         <owl-carousel-o [options]="customOptions" >
-            <ng-template carouselSlide *ngFor="let product of products">
+            <ng-template carouselSlide *ngFor="let product of products.products">
                 <div class="p1 p1-carousel">
                 <img class="img-set" src={{product.img}} alt="Image of product" width="190px">
                 <h2 class="prc">price:{{product.price}}$</h2>

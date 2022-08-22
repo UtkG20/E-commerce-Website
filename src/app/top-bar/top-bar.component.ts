@@ -12,7 +12,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   subscribe:Subscription;
   Accounts:any;
   currentUser:any;
-  
+
   constructor(private  productDataService:ProductDataService) { 
     this.subscribe=Subscription.EMPTY;
   }
@@ -35,6 +35,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
   countrySelected:string="";
   filterString:string='';
 
+  // logout(){
+  //   this.currentUser=null;
+  // }
   changeCountry(event:Event){
     // this.countrySelected=(event.target as HTMLInputElement).value;
     this.productDataService.setCountry((event.target as HTMLInputElement).value)

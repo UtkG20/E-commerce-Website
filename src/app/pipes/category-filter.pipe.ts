@@ -10,11 +10,11 @@ export class CategoryFilterPipe implements PipeTransform {
     if(countCategory==0||value.size===0){
       return value;
   }
-    let products=new Map();
-    for(const key of value.keys()){
-      for(const category of value.get(key).category){
+    let products=new Array;
+    for(let product of value){
+      for( let category of product.categories){
         if(selectedCategories.get(category)===true){
-        products.set(key,value.get(key));
+        products.push(product);
         console.log(products);
         break;
         }
