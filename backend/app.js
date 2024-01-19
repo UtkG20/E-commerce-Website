@@ -5,7 +5,7 @@ const productRoute = require('./api/routes/products');
 const mongoose=require ('mongoose');
 const bodyparser=require('body-parser');
 const cors= require('cors');
-mongoose.connect('mongodb+srv://ug_first:katori@ugfirst.vwkbc5r.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://goyalgoyal9784:THFfXn4JKOUoHUuB@e-commerce.zvwqbk9.mongodb.net/?retryWrites=true&w=majority')
 
 mongoose.connection.on('error',(error)=>{
     console.log('connection failed');
