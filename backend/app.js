@@ -28,13 +28,6 @@ app.use('/products',productRoute);
 app.use((req,res)=>{
     res.end('app page working')
 })
-// app.use((req,res,next)=>{
-//         res.status(404).json({
-//         message: 'ERROR....wrong URL'
-//     })
-
-// });
-
 
 module.exports=app
 //database connection

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     console.log(data);
     this.http.post("http://localhost:4000/user/login",data)
     .subscribe((result:any)=>{
-      // console.warn('result',result._id);
+      console.warn('result',result);
         this.productData.setCurrentUser(data.username);
         this.productData.setCurrentID(result._id);
         alert('logged in successfully');
@@ -25,21 +25,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // loginUser(username:any,password:any){
-  //   if(localStorage.getItem(username.value)){
-  //     let userData=JSON.parse(localStorage.getItem(username.value)!);
-  //     if(userData.password===password.value){
-  //       this.productData.setCurrentUser(username.value);
-  //       this.router.navigate(['home']);
-  //     }
-  //     else{
-  //       alert('invalid password ');
-  //     }
-  //   }
-  //   else{
-  //     alert('invalid username and password')
-  //   }
-  // }
   ngOnInit(): void {
   }
 

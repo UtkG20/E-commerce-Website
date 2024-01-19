@@ -74,20 +74,8 @@ export class MainBarComponent implements OnInit,OnDestroy {
       this.subscribe.unsubscribe();
   }
 
-  // countryFilter(){
-  //   for(let i=0;i<this.products.length;i++){
-  //     for(let j=0;j<this.products[i].countries.length;j++){
-  //       if(this.products[i].countries[j]===this.selectedCountry){
-          
-  //       }
-
-  //     }
-  //   }
-  // }
 
   addToCart(key:any){
-    // console.log(key)
-    // console.log('http://localhost:4000/user/'+this.currentID);
     this.http.get('http://localhost:4000/user/'+this.currentID)
     .subscribe((result:any)=>{
       console.log(result.userByID.cart);
@@ -118,13 +106,7 @@ export class MainBarComponent implements OnInit,OnDestroy {
     },(err:any)=>{
       alert(err);
     })
-    // let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
-    // if(!variable.cart.includes(key)){
-    //   variable.cart.push(key);
-    //   variable.quantities.push(1);
-    // }
-    // localStorage.setItem(this.currentUser,JSON.stringify(variable));
-    // console.log(variable);
+
   }
 
   addToWishlist(key:any){
@@ -147,12 +129,7 @@ export class MainBarComponent implements OnInit,OnDestroy {
     },(err:any)=>{
       alert(err);
     })
-    // console.log(this.currentUser)
-    // let variable=JSON.parse(localStorage.getItem(this.currentUser.toString())!);
-    // if(!variable.wishlist.includes(key))
-    //   variable.wishlist.push((key));
-    // localStorage.setItem(this.currentUser,JSON.stringify(variable));
-    // console.log(variable);
+    
   }
 
   id:any="open";
